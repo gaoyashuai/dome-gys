@@ -1,6 +1,12 @@
 package com.dome.controller;
 
 
+import com.dome.monitor.TestEvent;
+import com.dome.param.Result;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -13,9 +19,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @author gaoyashuai
  * @since 2020-06-18
  */
+@Slf4j
 @RestController
-@RequestMapping("/gys/t-user")
+@RequestMapping("/gys/parent")
 public class TUserController {
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
+
+    @PostMapping("/testListerner")
+    public Result getListerner(String param){
+        log.info("测试调用监听");
+        TestEvent testEvent = new TestEvent(this,param);
+        applicationEventPublisher.publishEvent(testEvent);
+        System.out.println("监听结束");
+        return new Result();
+    }
 
 }
 
