@@ -3,6 +3,7 @@ package com.dome.controller;
 
 import com.dome.monitor.TestEvent;
 import com.dome.param.Result;
+import com.dome.service.ITUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -34,6 +37,16 @@ public class TUserController {
         applicationEventPublisher.publishEvent(testEvent);
         System.out.println("监听结束");
         return new Result();
+    }
+
+    @Autowired
+    private ITUserService userService;
+
+    public Result getList (){
+        List<String> userIdList = userService.getList();
+
+        Result result = new Result();
+        return result;
     }
 
 }

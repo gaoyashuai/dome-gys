@@ -1,10 +1,18 @@
 package com.dome.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.dome.Timer.TimerTaskTest;
 import com.dome.domain.TUser;
 import com.dome.dao.TUserMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dome.service.ITUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Timer;
 
 /**
  * <p>
@@ -17,4 +25,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements ITUserService {
 
+    @Autowired
+    private TUserMapper tUserMapper;
+
+    @Override
+    public List<String> getList() {
+        tUserMapper.selectList(new QueryWrapper<TUser>().lambda()
+                .eq(TUser::getDeleted,false)
+                .and(i -> i.eq(TUser::getCreator, "李白").ne(TUser::getSalt, "活着"))
+        );
+        return null;
+    }
 }
