@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -30,10 +31,10 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
 
     @Override
     public List<String> getList() {
-        tUserMapper.selectList(new QueryWrapper<TUser>().lambda()
-                .eq(TUser::getDeleted,false)
+        List<String> collect = tUserMapper.selectList(new QueryWrapper<TUser>().lambda()
+                .eq(TUser::getDeleted, false)
                 .and(i -> i.eq(TUser::getCreator, "李白").ne(TUser::getSalt, "活着"))
-        );
-        return null;
+        ).stream().map(TUser::getUserId).collect(Collectors.toList());
+        return collect;
     }
 }

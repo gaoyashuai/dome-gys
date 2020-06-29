@@ -32,7 +32,7 @@ public class TUserController {
 
     @PostMapping("/testListerner")
     public Result getListerner(String param){
-        log.info("测试调用监听");
+        log.info("测试调用监听[{}]",param);
         TestEvent testEvent = new TestEvent(this,param);
         applicationEventPublisher.publishEvent(testEvent);
         System.out.println("监听结束");
@@ -42,10 +42,11 @@ public class TUserController {
     @Autowired
     private ITUserService userService;
 
+    @PostMapping("/list")
     public Result getList (){
         List<String> userIdList = userService.getList();
-
         Result result = new Result();
+        result.setData(userIdList);
         return result;
     }
 

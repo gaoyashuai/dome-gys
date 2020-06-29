@@ -1,0 +1,11 @@
+<html>
+<body>
+<h3>您好 $!{userName}, 欢迎您加入actsocial!</h3>
+
+<div>
+    您的email地址是<a href="mailto:${emailAddress}">$!{emailAddress}</a>.
+    本条信息是系统自动发送，请勿回复！
+</div>
+</body>
+
+</html>
