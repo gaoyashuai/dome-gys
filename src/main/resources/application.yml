@@ -14,12 +14,3 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-
-#邮件服务
-mail:
-  host: smtp.163.com
-  account: 18939206470@163.com
-  pwd: MPEVSEJBRRVEAUOV
-  debug: true
-  port: 25
