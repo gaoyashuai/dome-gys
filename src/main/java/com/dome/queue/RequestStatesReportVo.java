@@ -12,5 +12,6 @@ import lombok.Data;
  */
 @Data
 public class RequestStatesReportVo {
+    ///  不会用这玩意
     private String name;
 }
