@@ -12,6 +12,7 @@ public class RequestQueen {
 
     private static Logger logger = Logger.getLogger(RequestQueen.class);
 
+    /// 哈哈哈？？？
     private static Queue<RequestStatesReportVo> queue = new LinkedBlockingQueue<RequestStatesReportVo>(100);
     /**
      * 0、 需等待执行 1 、可以执行
