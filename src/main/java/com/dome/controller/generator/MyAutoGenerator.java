@@ -40,7 +40,7 @@ public class MyAutoGenerator {
         pc.setModuleName(scanner("模块名"));
         pc.setMapper("dao");
         pc.setEntity("domain");
-        pc.setParent("com.dome");
+        pc.setParent("com");
         mpg.setPackageInfo(pc);
 
 
