@@ -21,7 +21,7 @@ import java.util.logging.SimpleFormatter;
 
 public class Test {
 
-    public static void main(String[] args) {
+    public static void testClean() {
         List<TUser> list = new ArrayList<>();
         list.add(new TUser().setId(0l));
         list.add(new TUser().setId(1l));
@@ -71,4 +71,5 @@ public class Test {
         }
         Collections.reverse(list);
     }
+
 }
