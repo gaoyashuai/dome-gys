@@ -2,6 +2,10 @@ server:
   port: 8084
 
 spring:
+  data:
+    elasticsearch:
+      cluster-nodes: 127.0.0.1:9300 #格式 ip:端口 多个节点逗号隔开
+      cluster-name: my-application
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/mytest?useSSL=false&characterEncoding=utf8&tinyInt1isBit=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: root

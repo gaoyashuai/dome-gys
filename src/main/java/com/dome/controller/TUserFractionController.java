@@ -3,21 +3,20 @@ package com.dome.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dome.domain.TUser;
+import com.dome.domain.Book;
 import com.dome.domain.TUserFraction;
 import com.dome.domain.Test;
 import com.dome.param.ParentParam;
 import com.dome.param.Result;
+import com.dome.repository.BookRepo;
 import com.dome.service.ITUserFractionService;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.google.common.collect.Lists;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -28,7 +27,7 @@ import java.util.*;
  * @since 2020-07-29
  */
 @RestController
-@RequestMapping("/dome")
+@RequestMapping("/dome/test01")
 public class TUserFractionController {
 
     @Resource
@@ -47,12 +46,56 @@ public class TUserFractionController {
             System.out.println(o.toString());
         }
         Test test = new Test();
-        test.setObject(objectObjectLinkedHashMap);
+//        test.setObject(objectObjectLinkedHashMap);
         System.out.println(JSON.toJSONString(test));
 
         Result result = new Result();
         result.setData(objectObjectLinkedHashMap);
         return result;
     }
-}
 
+    @Resource
+    BookRepo bookRepo;
+
+    // 存数据
+    @PostMapping("/saveEs")
+    public Result saveEs(@RequestBody Book book) {
+
+        Book save = bookRepo.save(book);
+
+        Result result = new Result();
+        result.setCode("200");
+        result.setMessage("success");
+        result.setData(save);
+        return result;
+    }
+
+    // 根据name查找数据
+    @GetMapping("/book/get/{name}")
+    public Result getBook(@PathVariable String name) {
+        List<Book> byNameLike = bookRepo.findByNameLike(name);
+
+        Result result = new Result();
+        result.setCode("200");
+        result.setMessage("success");
+        result.setData(byNameLike);
+        return result;
+    }
+
+    @GetMapping("/book/all")
+    public List<Book> getAll() {
+        return Lists.newArrayList(bookRepo.findAll());
+    }
+
+    @DeleteMapping("/book/delete/{id}")
+    public Result deleteById(@PathVariable String id) {
+        Book book = new Book();
+        book.setId(id);
+        bookRepo.delete(book);
+
+        Result result = new Result();
+        result.setCode("200");
+        result.setMessage("success");
+        return result;
+    }
+}

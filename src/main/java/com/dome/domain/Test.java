@@ -2,6 +2,8 @@ package com.dome.domain;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * CLASSNAME Test
  *
@@ -12,5 +14,6 @@ import lombok.Data;
  */
 @Data
 public class Test {
-    private Object object;
+    private String name;
+    private List<Book> list;
 }
