@@ -1,5 +1,6 @@
 package com.dome.param;
 
+import com.dome.config.exception.CodeMsg;
 import lombok.Data;
 
 /**
@@ -15,4 +16,19 @@ public class Result {
     private String code = "200";
     private String message = "调用成功";
     private Object data;
+
+    public Result(String code, String msg) {
+        this.code=code;
+        this.message = msg;
+    }
+
+    public static Result error(CodeMsg fillArgs) {
+        Result result = new Result();
+        result.setCode(fillArgs.getCode());
+        result.setMessage(fillArgs.getMsg());
+        return result;
+    }
+
+    public Result() {
+    }
 }
